@@ -1,0 +1,13 @@
+{"code":1,
+	"data":
+	{"allotList":[1,2],"departmentList":
+		[
+			{"id":1,"isDelete":1,"name":"人力资源12"},
+			{"id":2,"isDelete":1,"name":"安全部门"},
+			{"id":3,"isDelete":1,"name":"管理部门"},
+			{"id":4,"isDelete":1,"name":"产品部门"},
+			{"id":5,"isDelete":0,"name":"开发部门"},
+			{"id":6,"isDelete":1,"name":"技术部门"},
+		]
+	}
+}

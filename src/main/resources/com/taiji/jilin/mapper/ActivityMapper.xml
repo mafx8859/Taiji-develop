@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.ActivityMapper">
+    <insert id="newActivity">
+        INSERT INTO t_activity(name, content,sponsor,organization, population, provide_meal, provide_hotel,
+                                need_id_card,need_health,need_insurance,need_safe,tel, qq, time, budget,year)
+        VALUES (#{name},#{content},#{sponsor},#{organization},#{population},#{provideMeal},#{provideHotel},
+                #{needIdCard},#{needHealth},#{needInsurance},#{needSafe},#{tel},#{qq},#{time},#{budget},#{year})
+    </insert>
+
+    <!--<delete id="delById">
+        DELETE
+        FROM t_activity
+        WHERE id = #{id}
+    </delete>-->
+
+    <update id="delById">
+        UPDATE t_activity
+        SET is_deleted = 0
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateById">
+        UPDATE t_activity
+        SET name = #{name},content = #{content},sponsor = #{sponsor},
+            organization = #{organization},population = #{population},
+            provide_meal = #{provideMeal},provide_hotel = #{provideHotel},
+            need_id_card = #{needIdCard},need_health = #{needHealth},
+            need_insurance = #{needInsurance},need_safe = #{needSafe},
+            tel = #{tel}, qq = #{qq},
+            time = #{time},budget = #{budget},status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryById" resultType="com.taiji.jilin.common.entity.Activity">
+        SELECT
+         id,name,content,population,
+         provide_hotel AS provideHotel,
+         provide_meal AS provideMeal,
+         need_id_card AS needIdCard,
+         need_health AS needHealth,
+         need_insurance AS needInsurance,
+         need_safe AS needSafe,
+         sponsor,organization,tel,qq,
+         time,budget,certificate,
+         who_certificate AS whoCertificate,
+         permit,
+         who_permit AS whoPermit,
+         status
+        FROM t_activity
+        WHERE id = #{id}
+        AND is_deleted = 1
+    </select>
+
+    <select id="queryAll" resultType="com.taiji.jilin.common.entity.Activity">
+        SELECT
+         id,name,content,population,
+         provide_hotel AS provideHotel,
+         provide_meal AS provideMeal,
+         need_id_card AS needIdCard,
+         need_health AS needHealth,
+         need_insurance AS needInsurance,
+         need_safe AS needSafe,
+         sponsor,organization,tel,qq,
+         time,budget,certificate,
+         who_certificate AS whoCertificate,
+         status,year
+        FROM t_activity
+        WHERE is_deleted = 1
+    </select>
+
+    <update id="audit">
+        UPDATE t_activity
+        SET status = 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="unAudit">
+        UPDATE t_activity
+        SET status = 2
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryByActivityId" resultType="com.taiji.jilin.common.dto.ApplicationMemberDto">
+        SELECT
+        tm.name AS memberName,
+        tm.sex,tm.age,
+        tm.telephone,
+        tm.birth,
+        tac.id AS activityId,
+        tac.name,tac.content,tac.population,
+        tac.provide_meal AS provideMeal,
+        tac.provide_hotel AS provideHotel,
+        tac.organization,tac.tel,tac.qq,tac.time,tac.budget,
+        tap.id AS applicationId,
+        tap.member_id AS memberId,
+        tap.insurance,
+        tap.health,
+        tap.meal,
+        tap.liability,
+        tap.hotel,
+        tap.status AS applicationStatus,
+        tap.score,
+        tap.create_time AS applyTime
+        FROM t_application tap
+        LEFT JOIN t_activity tac ON tac.id = tap.activity_id
+        LEFT JOIN t_member tm ON tap.member_id = tm.id
+        <where>
+            tap.activity_id = #{activityId}
+            <if test="meal != -1">
+                AND tap.meal = #{meal}
+            </if>
+            <if test="hotel != -1">
+                AND tap.hotel = #{hotel}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateCertificate">
+        UPDATE t_activity
+        SET certificate = #{certificate},
+            who_certificate = #{whoCertificate}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updatePermit">
+        UPDATE t_activity
+        SET permit = #{permit},
+            who_permit = #{whoPermit}
+        WHERE id = #{id}
+    </update>
+</mapper>

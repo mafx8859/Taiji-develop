@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.GuideMapper">
+    <select id="isExist" resultType="int">
+        SELECT COUNT(*)
+        FROM t_guide
+    </select>
+
+    <select id="getContent" resultType="String">
+        SELECT content
+        FROM t_guide
+        WHERE id = (SELECT max(id) FROM t_guide)
+    </select>
+
+    <select id="getId" resultType="int">
+        SELECT max(id) FROM t_guide
+    </select>
+
+    <update id="update">
+        UPDATE t_guide SET content = #{content}
+        WHERE id = #{id}
+    </update>
+
+    <insert id="newContent">
+        INSERT INTO t_guide(content)
+        VALUES(#{content})
+    </insert>
+</mapper>

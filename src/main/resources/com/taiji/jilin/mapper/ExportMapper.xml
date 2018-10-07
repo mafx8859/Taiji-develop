@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.ExportMapper">
+    <select id="exportActivity" resultType="com.taiji.jilin.common.dto.ActivityExportDto">
+        SELECT
+            name AS activityName,
+            content,population,
+            CASE provide_hotel
+              WHEN '1' THEN '是'
+              WHEN '0' THEN '否'
+              ELSE '其他' END AS provideHotel,
+            CASE provide_meal
+              WHEN '1' THEN '是'
+              WHEN '0' THEN '否'
+              ELSE '其他' END AS provideMeal,
+            organization AS activityOrganization,
+            tel,qq AS activityQq,
+            time AS activityTime,
+            budget,certificate
+        FROM t_activity
+    </select>
+
+    <select id="exportMember" resultType="com.taiji.jilin.common.dto.MemberExportDto">
+        SELECT
+            id,name AS realName,birth,
+            CASE sex
+              WHEN '1' THEN '男'
+              WHEN '2' THEN '女'
+              ELSE '其他' END AS sex,
+            (CASE is_admin
+              WHEN '1' THEN '系统管理员'
+              WHEN '2' THEN '单位管理员'
+              WHEN '3' THEN '普通会员'
+            END)AS isAdmin,
+            username,password,
+            duty,
+            CASE qualification
+              WHEN '1' THEN '博士研究生'
+              WHEN '2' THEN '硕士研究生'
+              WHEN '3' THEN '本科'
+              WHEN '4' THEN '专科（高职，高专，高技）'
+              WHEN '5' THEN '高中'
+              WHEN '6' THEN '初中'
+              WHEN '7' THEN '小学'
+              ELSE '其他' END AS qualification,
+            CASE political
+              WHEN '1' THEN '中共党员'
+              WHEN '2' THEN '共青团员'
+              WHEN '3' THEN '群众'
+              ELSE '其他' END AS political,
+            email,
+            (SELECT tor.name FROM t_organization tor WHERE tor.id = organization) AS organization,
+            performance,dues,area,company,
+            job_title AS jobTitle,
+            id_number AS idNumber,telephone,qq,grade,item,
+            experience,
+            activity
+        FROM t_member
+        WHERE id != 0
+        <if test="organization != 0">
+            AND organization = #{organization}
+        </if>
+        <if test="isAdmin !=0">
+            AND is_admin = #{isAdmin}
+        </if>
+        <if test="status != -1">
+            <if test="status == 0">
+                AND (status = 0 OR status IS NULL OR status = 1)
+            </if>
+            <if test="status == 2">
+                AND status = #{status}
+            </if>
+        </if>
+        <if test="isJudge != -1">
+            AND is_judge = #{isJudge}
+        </if>
+        <if test="isCoach != -1">
+            AND is_coach = #{isCoach}
+        </if>
+        <if test="isInstructor != -1">
+            AND is_instructor = #{isInstructor}
+        </if>
+        <if test="grade != -1">
+            AND grade = #{grade}
+        </if>
+    </select>
+
+    <select id="exportQuery" resultType="com.taiji.jilin.common.dto.QueryDto">
+        SELECT
+        ta.name AS activityName,
+        tm.name AS memberName,
+        (CASE tm.sex
+         WHEN 1 THEN '男'
+         WHEN 2 THEN '女'
+         END ) AS sex,
+        tm.birth,
+        tm.age,
+        tm.telephone AS tel,
+        tor.name AS organization,
+        tap.create_time AS applyTime,
+        (CASE tap.score
+        WHEN 1 THEN '金牌'
+        WHEN 2 THEN '银牌'
+        WHEN 3 THEN '铜牌'
+        WHEN 4 THEN '合格'
+        WHEN 5 THEN '不合格'
+        WHEN 6 THEN '参加表演'
+        ELSE '无成绩'
+        END ) AS score
+        FROM t_activity ta
+        RIGHT JOIN t_application tap ON ta.id = tap.activity_id
+        LEFT JOIN t_member tm ON tm.id = tap.member_id
+        LEFT JOIN t_member_organization tmo ON tm.id = tmo.member_id
+        LEFT JOIN t_organization tor ON tor.id = tmo.organization_id
+        <where>
+            <if test="activity != 0">
+                AND ta.id = #{activity}
+            </if>
+            <if test="organization !=0">
+                AND tor.id = #{organization}
+            </if>
+            <if test="score != 0">
+                AND tap.score = #{score}
+            </if>
+            <if test="status != -1">
+                <if test="status == 0">
+                    AND tap.status = 0 OR tap.status IS NULL OR tap.status == 1
+                </if>
+                <if test="status == 2">
+                    AND tap.status = 2
+                </if>
+            </if>
+        </where>
+    </select>
+</mapper>

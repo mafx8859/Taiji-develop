@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.OrganizationMapper">
+    <insert id="newOrganization">
+        INSERT INTO t_organization(name, address, department, qq_group, principal1,job1,title1,tel1, principal2,job2,title2,tel2, performance,dues ,admin, status)
+        VALUES (#{name},#{address}, #{department},#{qqGroup},#{principal1},#{job1},#{title1},#{tel1},#{principal2},#{job2},#{title2},#{tel2},#{performance},#{dues},#{admin},#{status})
+    </insert>
+
+    <delete id="delById">
+        DELETE FROM t_organization
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateById">
+        UPDATE t_organization
+        SET name = #{name},address = #{address},
+            department = #{department},qq_group = #{qqGroup},
+            principal1 = #{principal1},job1 = #{job1},title1 = #{title1},tel1 = #{tel1},
+            principal2 = #{principal2},job2 = #{job2},title2 = #{title2},tel2 = #{tel1},
+            performance = #{performance},dues = #{dues},
+            admin = #{admin},status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryAll" resultType="com.taiji.jilin.common.entity.Organization">
+        SELECT
+        t_organization.id,t_organization.name, address, department, qq_group, principal1,job1,title1,tel1, principal2,job2,title2,tel2,
+        t_member.name AS admin, t_organization.status
+        FROM t_organization
+        LEFT JOIN t_member ON t_member.id = t_organization.admin
+    </select>
+
+    <select id="listMember" resultType="com.taiji.jilin.common.entity.Member">
+        SELECT
+        tm.id,name,birth,
+        CASE sex
+              WHEN '1' THEN '男'
+              WHEN '2' THEN '女'
+              ELSE '其他' END AS sex,
+        is_admin AS isAdmin,
+        username,password,
+        (SELECT tor.name FROM t_organization tor WHERE tmo.organization_id = tor.id) AS organization,
+        is_manager AS isManager,
+        level,performance,dues,area,company,
+        job_title AS jobTitle,
+        id_number AS idNumber,telephone,qq,photo,grade,item,
+        grade_date AS gradeDate,
+        grade_num AS  gradeNum,
+        instructed_date AS instructedDate,
+        instructed_num AS instructedNum,
+        instructed_item AS instructedItem,
+        managed_date AS managedDate,
+        managed_num AS managedNum,
+        managed_item AS managedItem,
+        examed_date AS examedDate,
+        examed_num AS examedNum,
+        examed_item AS examedItem,
+        is_judge AS isJudge,
+        judge_number AS judgeNumber,
+        judge_date AS judgeDate,
+        is_coach AS isCoach,
+        coach_date AS coachDate,
+        coach_number AS coachNumber,
+        is_instructor AS isInstructor,
+        instructor_date AS instructorDate,
+        instructor_number AS instructorNumber,
+        experience,
+        activity,status
+        FROM t_member tm LEFT JOIN t_member_organization tmo
+        ON tm.id = tmo. member_id
+        AND tmo.organization_id = #{organizationId}
+        WHERE tmo.organization_id = #{organizationId} AND tm.is_deleted = 1
+    </select>
+
+    <update id="audit">
+        UPDATE t_organization
+        SET status = 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="unAudit">
+        UPDATE t_organization
+        SET status = 2
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryById" resultType="com.taiji.jilin.common.entity.Organization">
+        SELECT id,
+        name,address,department,
+        qq_group AS qqGroup,
+        principal1,job1,title1,tel1,
+        principal2,job2,title2,tel2,
+        performance,dues,
+        admin,status
+        FROM t_organization
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryAllPassed" resultType="com.taiji.jilin.common.entity.Organization">
+        SELECT t_organization.id,
+        t_organization.id,t_organization.name, address,department, qq_group, principal1,job1,title1,tel1, principal2,job2,title2,tel2,
+        t_member.name AS admin, t_organization.status
+        FROM t_organization
+        LEFT JOIN t_member ON t_member.id = t_organization.admin
+        WHERE t_organization.status = '1'
+    </select>
+</mapper>

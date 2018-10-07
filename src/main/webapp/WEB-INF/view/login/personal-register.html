@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>会员申请</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- select2 -->
+  <link rel="stylesheet" href="../../../resources/js/bower_components/select2/dist/css/select2.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="../../../resources/js/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/link.html" -->
+  
+</head>
+<body class="hold-transition skin-black sidebar-mini">
+
+
+  <header class="main-header">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <span class="logo-mini">首页</span>
+        <span class="logo-lg">吉林省太极拳协会</span>
+      </a>
+      <nav class="navbar navbar-static-top">
+
+      </nav>
+    </header>
+    <section class="content-header bg-gray">
+      <h1 class="text-center">
+        申请会员
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 登录</a></li>
+        <li class="active">角色管理</li>
+      </ol>
+    </section>
+
+    <section class="content bg-gray">
+        <div class="box box-warning">
+          <form class="form-horizontal clearfix">
+            <div class="box-header with-border text-center">
+              <h3 class="box-title">用户登录信息</h3>
+            </div>
+            <div class="box-body">
+              <div class="form-group clearfix">
+                  <label class="col-sm-2 control-label">用户名（登录）：</label>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control require-text username" placeholder="请输入..." name="username">
+                  </div>
+
+                  <label class="col-sm-1 control-label">密码：</label>
+                  <div class="col-sm-2">
+                    <input type="password" class="form-control require-text psw" placeholder="请输入..." name="password">
+                  </div>
+
+                  <label class="col-sm-1 control-label">重复密码：</label>
+                  <div class="col-sm-2">
+                    <input type="password" class="form-control require-text psw2" placeholder="请输入...">
+                  </div>
+              </div>
+              <p class="username-tip text-red none text-center">此账号已存在请重新输入</p>
+              <p class="psw-tip text-red none text-center">两次密码不一致请重新输入</p>
+            </div>
+            <div class="box-header with-border text-center">
+              <h3 class="box-title">基本信息</h3>
+            </div>
+            <div class="box-body">
+                  <div class="form-group clearfix">
+                      <label class="col-sm-3 control-label">姓名：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="name">
+                      </div>
+
+                      <label class="col-sm-1 control-label">身份证号：</label>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="idNumber">
+                      </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                    <label class="col-sm-3 control-label">性别：</label>
+                    <div class="col-sm-2">
+                      <select class="form-control" name="sex">
+                        <option>男</option>
+                        <option>女</option>
+                      </select>
+                    </div>
+
+                    <label class="col-sm-2 control-label">年龄：</label>
+                    <div class="col-sm-2">
+                      <select class="form-control" name="age">
+                        <option>请选择...</option>
+                        <option>option 1</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                    <label class="col-sm-3 control-label">地区：</label>
+                    <div class="col-sm-2">
+                      <select class="form-control city">
+                        <option>请选择...</option>
+                      </select>
+                    </div>
+
+                    <label class="col-sm-2 control-label">区县：</label>
+                    <div class="col-sm-2">
+                      <select class="form-control area" name="area">
+                        <option>请选择...</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                      <!-- <label class="col-sm-3 control-label">工作单位：</label>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="company">
+                      </div> -->
+                      <label class="col-sm-3 control-label">工作单位名称：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control company-option" name="organization">
+                          <option value="-1">请选择...</option>
+                          <option value="1">option 1</option>
+                          <option value="-2">暂无</option>
+                        </select>
+                      </div>
+                      <label class="col-sm-2 control-label">职称：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" name="jobTitle">
+                          <option>请选择...</option>
+                          <option>教授</option>
+                          <option>其他</option>
+                        </select>
+                      </div>
+                  </div>
+                  
+                  <div class="form-group clearfix">
+                    <label class="col-sm-3 control-label">联系QQ：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="qq">
+                      </div>
+                      <label class="col-sm-1 control-label">联系电话：</label>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="telephone">
+                      </div>
+                      
+                  </div>
+
+            </div>
+            <div class="box-header with-border text-center">
+              <h3 class="box-title">专业信息</h3>
+            </div>
+            <div class="box-body">
+                  <div class="form-group clearfix">
+                      <label class="col-sm-2 control-label">裁判员资格：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" name="isJudge">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">证书编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="judgeNumber">
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker" name="judgeDate">
+                        </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                      <label class="col-sm-2 control-label">教练员资格：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" name="isCoach">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">证书编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="coachNumber">
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker" name="coachDate">
+                        </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                      <label class="col-sm-2 control-label">社会指导资格：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" name="isInstructor">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">证书编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="instructorNumber">
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker" name="instructorDate">
+                        </div>
+                  </div>
+                  
+                  <div class="form-group clearfix">
+                      <label class="col-sm-1 control-label">段位等级：</label>
+                      <div class="col-sm-1">
+                        <select class="form-control" name="grade">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+                      
+                      <label class="col-sm-1 control-label">晋段项目：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">段位编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="">
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker" name="">
+                        </div>
+                  </div>
+
+                  <!-- <div class="form-group clearfix">
+
+                      <label class="col-sm-2 control-label">段位指导员编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="">
+                      </div>
+
+                      <label class="col-sm-1 control-label">指导项目：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker">
+                        </div>
+                  </div>
+                  
+                  <div class="form-group clearfix">
+                      <label class="col-sm-2 control-label">段位管理员编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="">
+                      </div>
+
+                      <label class="col-sm-1 control-label">管理项目：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker">
+                        </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+
+                      <label class="col-sm-2 control-label">段位考评员编号：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="">
+                      </div>
+
+                      <label class="col-sm-1 control-label">考评项目：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-1 control-label">获证日期：</label>
+                        <div class="input-group date col-sm-2">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right datepicker">
+                        </div>
+                  </div> -->
+
+                  <div class="form-group clearfix">
+                      <label class="col-sm-3 control-label">习太极拳经历和获奖情况：</label>
+                      <div class="col-sm-6">
+                        <textarea id="editor1" name="experience" rows="10" cols="80">
+                          请在此输入...
+                        </textarea>
+                      </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                      <label class="col-sm-3 control-label">参与本协会活动情况：</label>
+                      <div class="col-sm-6">
+                        <textarea id="editor2" name="activity" rows="10" cols="80">
+                          请在此输入...
+                        </textarea>
+                      </div>
+                  </div>
+            </div>
+              <!-- 单位 -->
+            <div class="company none">
+              <div class="box-header with-border text-center">
+                <h3 class="box-title">单位会员信息</h3>
+              </div>
+              <div class="box-body">
+                    <div class="form-group clearfix">
+                      
+
+                      <label class="col-sm-3 control-label">会员级别：</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" name="level">
+                          <option>请选择...</option>
+                          <option>option 1</option>
+                        </select>
+                      </div>
+
+                      <label class="col-sm-2 control-label">主管部门</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="">
+                      </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                        <label class="col-sm-3 control-label">经营范围及主要业绩：</label>
+                        <div class="col-sm-6">
+                          <textarea id="editor3" name="performance" rows="10" cols="80">
+                            请在此输入...
+                          </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group clearfix">
+                        <label class="col-sm-3 control-label">会费缴纳记录：</label>
+                        <div class="col-sm-6">
+                          <textarea id="editor4" name="dues" rows="10" cols="80">
+                            请在此输入...
+                          </textarea>
+                        </div>
+                    </div>
+              </div>
+            </div>
+            <p class="text-center text-red">备注：基本信息为必填选项，选填项目请根据自身情况填写，可提高完整性.</p>
+            <div class="box-footer text-center">
+              <p class="text-red none">信息不完整，请完整填写所需信息</p>
+              <a href="login.html" class="btn bg-olive"> 已有账号,现在就去登录！</a>
+              <input type="submit" class="btn btn-primary J-submit" value="提交申请">
+            </div>
+          </form>
+        </div>
+    </section>
+
+
+  <footer class="box-footer">
+    <div class="pull-right hidden-xs">
+      <b>当前版本</b> 1.0.0
+    </div>
+    <strong>版权: &copy; 2014-2016 
+      <a href="javascript:;">吉林省太极拳后台管理系统</a>
+    </strong> 
+  </footer>
+
+
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/script.html" -->
+
+<!-- select2 -->
+<script src="../../../resources/js/bower_components/select2/dist/js/select2.full.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../../resources/js/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<!-- ckeditor -->
+<script src="../../../resources/js/bower_components/ckeditor/ckeditor.js"></script>
+<!-- 验证模块 -->
+<script src="../../../resources/js/pages/common/verify.js"></script>
+<!-- 省市联动 -->
+<script src="../../../resources/js/pages/common/citye_linkage.js"></script>
+<script src="../../../resources/js/pages/login/personal-register.js"></script>
+<script>
+  $(function () {
+    $('.select2').select2();
+    //Date picker
+    $('.datepicker').datepicker({
+      autoclose: true
+    });
+    // ckeditor
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('editor2');
+    CKEDITOR.replace('editor3');
+    CKEDITOR.replace('editor4');
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.ApplicationMapper">
+    <insert id="newApplication">
+        INSERT INTO t_application(member_id, activity_id, insurance,health, meal, liability, hotel,status)
+        VALUES (#{memberId},#{activityId},#{insurance},#{health},#{meal},#{liability},#{hotel},'0')
+    </insert>
+
+    <update id="audit">
+        UPDATE t_application SET status = 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="unAudit">
+        UPDATE t_application SET status = 2
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryByActivityId" resultType="com.taiji.jilin.common.entity.Application">
+        SELECT  member_id AS memberId,
+        activity_id AS activityId,
+        insurance,health,meal,liability,hotel,status
+        FROM t_application
+        WHERE activity_id = #{activityId}
+    </select>
+
+    <select id="queryByMemberId" resultType="com.taiji.jilin.common.entity.Application">
+        SELECT  member_id AS memberId,
+        activity_id AS activityId,
+        insurance,health,meal,liability,hotel,status
+        FROM t_application
+        WHERE member_id = #{memberId}
+    </select>
+
+    <delete id="delById">
+        DELETE FROM t_application
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE t_application
+        SET member_id = #{memberId},
+            activity_id = #{applicationId},
+            insurance = #{insurance},
+            health = #{health},
+            meal = #{meal},
+            liability = #{liability},
+            hotel = #{hotel}
+        WHERE id = #{id}
+    </update>
+    
+    <update id="grade">
+        UPDATE t_application
+        SET score = #{score}
+        WHERE id = #{id}
+    </update>
+
+    <select id="listNotSignIn" resultType="com.taiji.jilin.common.dto.ApplicationMemberDto">
+        SELECT tac.id AS activityId,
+        tac.name,tac.content,tac.population,
+        tac.provide_meal AS provideMeal,
+        tac.provide_hotel AS provideHotel,
+        tac.sponsor,tac.organization,tac.tel,tac.qq,tac.time,tac.budget
+        FROM t_activity tac
+        WHERE tac.id NOT IN (
+        SELECT tac.id
+        FROM t_activity tac
+        LEFT JOIN t_application tap
+        ON tac.id = tap.activity_id
+        WHERE tap.member_id = #{memberId}
+        )
+    </select>
+
+    <select id="listSignIn" resultType="com.taiji.jilin.common.dto.ApplicationMemberDto">
+        SELECT tac.id AS activityId,
+        tac.name,tac.content,tac.population,
+        tac.provide_meal AS provideMeal,
+        tac.provide_hotel AS provideHotel,
+        tac.sponsor,tac.organization,tac.tel,tac.qq,tac.time,tac.budget,
+        tap.id AS applicationId,
+        tap.member_id AS memberId,
+        tap.insurance,
+        tap.health,
+        tap.meal,
+        tap.liability,
+        tap.hotel,
+        tap.status AS applicationStatus
+        FROM t_activity tac
+        LEFT JOIN t_application tap
+        ON tac.id = tap.activity_id
+        WHERE tap.member_id = #{memberId}
+    </select>
+
+    <select id="queryByMemberAndActivity" resultType="com.taiji.jilin.common.entity.Application">
+        SELECT id,
+        member_id AS memberId,
+        activity_id AS activityId,
+        insurance,health,meal,liability,hotel,status
+        FROM t_application
+        WHERE member_id = #{memberId} AND activity_id = #{activityId}
+    </select>
+
+    <select id="queryById" resultType="com.taiji.jilin.common.entity.Application">
+        SELECT id,
+        member_id AS memberId,
+        activity_id AS activityId,
+        insurance,health,meal,liability,hotel,status,
+        (CASE score
+        WHEN 1 THEN '金牌'
+        WHEN 2 THEN '银牌'
+        WHEN 3 THEN '铜牌'
+        WHEN 4 THEN '合格'
+        WHEN 5 THEN '不合格'
+        WHEN 6 THEN '参加表演'
+        ELSE '无成绩'
+        END ) AS score
+        FROM t_application
+        WHERE id = #{applicationId}
+    </select>
+</mapper>

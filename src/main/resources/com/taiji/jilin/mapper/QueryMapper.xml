@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taiji.jilin.mapper.QueryMapper">
+    <select id="query" resultType="com.taiji.jilin.common.dto.QueryDto">
+        SELECT
+        ta.name AS activityName,
+        tm.name AS memberName,
+        (CASE tm.sex
+         WHEN 1 THEN '男'
+         WHEN 2 THEN '女'
+         END ) AS sex,
+        tm.birth,
+        tm.age,
+        tm.telephone AS tel,
+        tor.name AS organization,
+        tap.create_time AS applyTime,
+        tap.score,
+        ta.year,
+        ta.id AS activityId
+        FROM t_activity ta
+        RIGHT JOIN t_application tap ON ta.id = tap.activity_id
+        LEFT JOIN t_member tm ON tm.id = tap.member_id
+        LEFT JOIN t_member_organization tmo ON tm.id = tmo.member_id
+        LEFT JOIN t_organization tor ON tor.id = tmo.organization_id
+        <where>
+            <if test="activityId != 0">
+                AND ta.id = #{activityId}
+            </if>
+            <if test="organizationId !=0">
+                AND tor.id = #{organizationId}
+            </if>
+            <if test="score != 0">
+                AND tap.score = #{score}
+            </if>
+            <if test="status != -1">
+                <if test="status == 0">
+                    AND tap.status = 0 OR tap.status IS NULL OR tap.status = 1
+                </if>
+                <if test="status == 2">
+                    AND tap.status = 2
+                </if>
+            </if>
+            <if test="sex != -1">
+                AND sex = #{sex}
+            </if>
+        </where>
+    </select>
+</mapper>

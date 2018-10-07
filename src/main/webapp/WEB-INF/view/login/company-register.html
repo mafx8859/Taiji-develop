@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>单位申请</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- select2 -->
+  <link rel="stylesheet" href="../../../resources/js/bower_components/select2/dist/css/select2.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="../../../resources/js/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/link.html" -->
+  
+</head>
+<body class="hold-transition skin-black sidebar-mini">
+
+
+  <header class="main-header">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <span class="logo-mini">首页</span>
+        <span class="logo-lg">吉林省太极拳协会</span>
+      </a>
+      <nav class="navbar navbar-static-top">
+
+      </nav>
+    </header>
+    <section class="content-header bg-gray">
+      <h1 class="text-center">
+        申请单位会员
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 登录</a></li>
+        <li class="active">角色管理</li>
+      </ol>
+    </section>
+
+    <section class="content bg-gray">
+        <div class="box box-warning">
+          <form class="form-horizontal clearfix">
+            <!-- 单位注册 -->
+            <div class="box-header with-border text-center">
+              <h3 class="box-title">单位基本信息</h3>
+            </div>
+            <div class="box-body">
+                  <div class="form-group clearfix">
+                    <label class="col-sm-3 control-label">单位名称：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="name">
+                    </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                    <label class="col-sm-3 control-label">单位地址：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="address">
+                    </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                    <label class="col-sm-3 control-label">单位QQ群：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="qqGroup">
+                    </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                      <label class="col-sm-4 control-label">负责人1：</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="principal1">
+                      </div>
+                  </div>
+                  <div class="form-group clearfix">
+                    <label class="col-sm-4 control-label">职务：</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="job1">
+                      </div>
+                  </div>
+                  <div class="form-group clearfix">
+                    <label class="col-sm-4 control-label">职称：</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="title1">
+                    </div>
+                  </div>
+                  <div class="form-group clearfix">
+                    <label class="col-sm-4 control-label">联系方式：</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="tel1">
+                    </div>
+                  </div>
+                  <div class="form-group clearfix">
+                      <label class="col-sm-4 control-label">负责人2：</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="principal2">
+                      </div>
+                  </div>
+                  <div class="form-group clearfix">
+                    <label class="col-sm-4 control-label">职务：</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="job2">
+                    </div>
+                  </div>
+                  <div class="form-group clearfix">
+                    <label class="col-sm-4 control-label">职称：</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="title2">
+                    </div>
+                  </div>
+                  <div class="form-group clearfix">
+                    <label class="col-sm-4 control-label">联系方式：</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control require-text" placeholder="请输入..." name="tel2">
+                    </div>
+                  </div>
+
+                  <div class="form-group clearfix">
+                      <label class="col-sm-3 control-label">单位管理员：</label>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control require-text" placeholder="请输入..." name="admin">
+                      </div>
+                  </div>
+
+            </div>
+
+            <div class="box-footer text-center">
+              <p class="text-red none">信息不完整，请完整填写所需信息</p>
+              <a href="login.html" class="btn bg-olive"> 暂不申请！</a>
+              <input type="submit" class="btn btn-primary J-submit" value="提交申请">
+            </div>
+          </form>
+        </div>
+    </section>
+
+
+  <footer class="box-footer">
+    <div class="pull-right hidden-xs">
+      <b>当前版本</b> 1.0.0
+    </div>
+    <strong>版权: &copy; 2014-2016 
+      <a href="javascript:;">吉林省太极拳后台管理系统</a>
+    </strong> 
+  </footer>
+
+
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/script.html" -->
+
+<!-- select2 -->
+<script src="../../../resources/js/bower_components/select2/dist/js/select2.full.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../../resources/js/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<!-- ckeditor -->
+<script src="../../../resources/js/bower_components/ckeditor/ckeditor.js"></script>
+<!-- 验证模块 -->
+<script src="../../../resources/js/pages/common/verify.js"></script>
+<!-- <script>
+  $(function () {
+    $('.select2').select2();
+    //Date picker
+    $('.datepicker').datepicker({
+      autoclose: true
+    });
+  })
+</script> -->
+</body>
+</html>

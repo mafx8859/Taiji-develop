@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>测评结果展示导出</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/link.html" -->
+
+</head>
+<body class="hold-transition skin-black sidebar-mini">
+<div class="wrapper">
+
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/header.html" -->
+  
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/sidebar.html" -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        测评结果导出
+        <small>栏目</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">成绩查询</a></li>
+        <li class="active">测评结果导出</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">测评结果导出</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form role="form">
+            
+              <div class="form-group">
+                <label>活动名称：</label>
+                <select class="form-control">
+                  <option>请选择</option>
+                  <option>产品部</option>
+                  <option>技术部</option>
+                </select>
+              </div>
+              
+              <div class="box-footer">
+                  <input type="submit" class="btn btn-primary" value="查询">
+              </div>
+          </form>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">活动参与者列表</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                      <th>活动名称</th>
+                      <th>参与者姓名</th>
+                      <th>性别</th>
+                      <th>年龄</th>
+                      <th>联系电话</th>
+                      <th>所属单位</th>
+                      <th>报名时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>太极拳</td>
+                        <td>哈哈</td>
+                        <td>男</td>
+                        <td>16</td>
+                        <td>16</td>
+                        <td>吉林省太极拳协会</td>
+                        <td>2017-8 到2017-8</td>
+                    </tr>
+                    <tr>
+                        <td>太极拳</td>
+                        <td>哈哈</td>
+                        <td>男</td>
+                        <td>16</td>
+                        <td>16</td>
+                        <td>吉林省太极拳协会</td>
+                        <td>2017-8 到2017-8</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <th>活动名称</th>
+                      <th>参与者姓名</th>
+                      <th>性别</th>
+                      <th>年龄</th>
+                      <th>联系电话</th>
+                      <th>所属单位</th>
+                      <th>报名时间</th>
+                    </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/footer.html" -->
+</div>
+<!-- ./wrapper -->
+
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/script.html" -->
+<!-- CKeditor -->
+<script src="../../../resources/js/bower_components/ckeditor/ckeditor.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable();
+  })
+</script>
+</body>
+</html>

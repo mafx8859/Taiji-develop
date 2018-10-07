@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>活动详情</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/link.html" -->
+
+</head>
+<body class="hold-transition skin-black sidebar-mini">
+<div class="wrapper">
+
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/header.html" -->
+  
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/sidebar.html" -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        单位详情
+        <small>栏目</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">活动管理</a></li>
+        <li class="active">活动详情</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <i class="fa fa-edit"></i>
+
+              <h3 class="box-title">活动具体信息：</h3>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-body">
+              <dl class="dl-horizontal">
+                <dt>单位名称：</dt>
+                <dd>A description list is perfect for defining terms.</dd>
+                <dt>单位地址：</dt>
+                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                <dt>单位QQ群：</dt>
+                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                <dt>单位负责人1：</dt>
+                <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
+                  sit amet risus.
+                </dd>
+                <dt>单位负责人2：</dt>
+                <dd>sada</dd>
+              </dl>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+      <a href="list.html" class="btn bg-blue">返回活动列表</a>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/footer.html" -->
+</div>
+<!-- ./wrapper -->
+
+  <!--#include file="/Taiji/src/main/webapp/WEB-INF/view/common/script.html" -->
+  <script src="../../../resources/js/pages/common/verify.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+  })
+</script>
+</body>
+</html>

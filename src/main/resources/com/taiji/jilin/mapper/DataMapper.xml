@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.DataMapper">
+    <select id="queryCouch" resultType="com.taiji.jilin.common.entity.data.Coach">
+        SELECT id,name,couch_id AS couchId
+        FROM t_couch
+    </select>
+
+    <select id="queryJudge" resultType="com.taiji.jilin.common.entity.data.Judge">
+        SELECT id,name,judge_id AS judgeId
+        FROM t_judge
+    </select>
+
+    <select id="queryGrade" resultType="com.taiji.jilin.common.entity.data.Grade">
+        SELECT id,name,grade_id AS gradeId
+        FROM t_grade
+    </select>
+
+    <select id="queryInstructor" resultType="com.taiji.jilin.common.entity.data.Instructor">
+        SELECT id,name,instructor_id AS instructorId
+        FROM t_instructor
+    </select>
+</mapper>

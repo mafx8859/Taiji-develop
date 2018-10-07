@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taiji.jilin.mapper.MemberMapper">
+
+    <insert id="newMember">
+        INSERT INTO `t_member`(name, birth,sex,is_admin,username,password,duty,qualification,political,email,
+                               organization,is_manager,level,performance,
+                                dues,area,company,job_title,id_number,telephone,qq,photo,grade,item,grade_num,grade_date,
+                                instructed_num,instructed_item,instructed_date,managed_num,managed_item,managed_date,
+                                examed_num,examed_item,examed_date,is_judge,judge_number,judge_date,is_coach,coach_number,
+                                coach_date,is_instructor,instructor_number,instructor_date,experience,activity,status,authCode)
+        VALUES(#{name},#{birth},#{sex},#{isAdmin},#{username},#{password},
+                #{duty},#{qualification},#{political},#{email},
+                #{organization},#{isManager},#{level},#{performance},#{dues},#{area},#{company},#{jobTitle},#{idNumber},
+                #{telephone},#{qq},#{photo},#{grade},#{item},#{gradeNum},#{gradeDate},#{instructedNum},#{instructedItem},#{instructedDate},#{managedNum},#{managedItem},#{managedDate},
+                #{examedNum},#{examedItem},#{examedDate},#{isJudge},#{judgeNumber},#{judgeDate},#{isCoach},#{coachNumber},
+                #{coachDate},#{isInstructor},#{instructorNumber},#{instructorDate},#{experience},#{activity},#{status},#{authCode})
+    </insert>
+
+    <select id="checkUsername" resultType="int">
+        SELECT COUNT(*) FROM t_member WHERE username = #{username}
+    </select>
+
+    <select id="queryIdByUsn" resultType="int">
+        SELECT id FROM t_member WHERE username = #{username}
+    </select>
+
+    <select id="queryById" resultType="com.taiji.jilin.common.entity.Member">
+        SELECT
+            id,name,birth,
+            sex,
+            is_admin AS isAdmin,
+            username,password,
+            duty,qualification,political,email,
+            (SELECT tor.name FROM t_organization tor WHERE organization = tor.id) AS organization,
+            is_manager AS isManager,
+            level,performance,dues,area,company,
+            job_title AS jobTitle,
+            id_number AS idNumber,telephone,qq,photo,grade,item,
+            grade_date AS gradeDate,
+            grade_num AS  gradeNum,
+            instructed_date AS instructedDate,
+            instructed_num AS instructedNum,
+            instructed_item AS instructedItem,
+            managed_date AS managedDate,
+            managed_num AS managedNum,
+            managed_item AS managedItem,
+            examed_date AS examedDate,
+            examed_num AS examedNum,
+            examed_item AS examedItem,
+            is_judge AS isJudge,
+            judge_number AS judgeNumber,
+            judge_date AS judgeDate,
+            is_coach AS isCoach,
+            coach_date AS coachDate,
+            coach_number AS coachNumber,
+            is_instructor AS isInstructor,
+            instructor_date AS instructorDate,
+            instructor_number AS instructorNumber,
+            experience,
+            activity,status
+        FROM t_member
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="queryDetail" resultType="com.taiji.jilin.common.entity.Member">
+        SELECT
+            id,name,birth,
+            sex,
+            is_admin AS isAdmin,
+            username,password,
+            duty,qualification,political,email,
+            organization,
+            is_manager AS isManager,
+            level,performance,dues,area,company,
+            job_title AS jobTitle,
+            id_number AS idNumber,telephone,qq,photo,grade,item,
+            grade_date AS gradeDate,
+            grade_num AS  gradeNum,
+            instructed_date AS instructedDate,
+            instructed_num AS instructedNum,
+            instructed_item AS instructedItem,
+            managed_date AS managedDate,
+            managed_num AS managedNum,
+            managed_item AS managedItem,
+            examed_date AS examedDate,
+            examed_num AS examedNum,
+            examed_item AS examedItem,
+            is_judge AS isJudge,
+            judge_number AS judgeNumber,
+            judge_date AS judgeDate,
+            is_coach AS isCoach,
+            coach_date AS coachDate,
+            coach_number AS coachNumber,
+            is_instructor AS isInstructor,
+            instructor_date AS instructorDate,
+            instructor_number AS instructorNumber,
+            experience,
+            activity,status
+        FROM t_member
+        WHERE `id` = #{id}
+    </select>
+
+    <!-- <delete id="delById">
+        DELETE FROM t_member
+        WHERE id = #{id}
+    </delete> -->
+
+    <update id="delById">
+        UPDATE t_member
+        SET is_deleted = 0
+        WHERE id = #{id}
+    </update>
+
+    <update id="update">
+        UPDATE t_member
+        SET name = #{name}, birth = #{birth}, sex = #{sex},username = #{username},password = #{password},is_admin = #{isAdmin},
+            duty = #{duty},qualification = #{qualification},political = #{political},email = #{email},
+            organization = #{organization},is_manager = #{isManager},level = #{level},performance = #{performance},dues = #{dues},area = #{area},company = #{company},job_title = #{jobTitle},id_number = #{idNumber},
+            telephone = #{telephone},qq = #{qq},photo = #{photo},grade = #{grade},item = #{item},grade_num = #{gradeNum},grade_date = #{gradeDate},instructed_num = #{instructedNum},instructed_item = #{instructedItem},
+            instructed_date = #{instructedDate},managed_num = #{managedNum},managed_item = #{managedItem},managed_date = #{managedDate},examed_num = #{examedNum},examed_item = #{examedItem},examed_date = #{examedDate},
+            is_judge = #{isJudge},judge_number = #{judgeNumber},judge_date = #{judgeDate},is_coach = #{isCoach},coach_number = #{coachNumber},coach_date = #{coachDate},
+            is_instructor = #{isInstructor},instructor_number = #{instructorNumber},instructor_date = #{instructorDate},experience = #{experience},
+            activity = #{activity},status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryByUsnAndPsw" resultType="com.taiji.jilin.common.entity.Member">
+        SELECT t_member.id,name,birth,
+            CASE sex
+              WHEN '1' THEN '男'
+              WHEN '2' THEN '女'
+              ELSE '其他' END AS sex,
+            is_admin AS isAdmin,
+            username,password,
+            t_member_organization.organization_id AS organization,
+            is_manager AS isManager,
+            "level",performance,dues,area,company,
+            job_title AS jobTitle,
+            id_number AS idNumber,telephone,qq,photo,grade,item,
+            grade_date AS gradeDate,
+            grade_num AS  gradeNum,
+            instructed_date AS instructedDate,
+            instructed_num AS instructedNum,
+            instructed_item AS instructedItem,
+            managed_date AS managedDate,
+            managed_num AS managedNum,
+            managed_item AS managedItem,
+            examed_date AS examedDate,
+            examed_num AS examedNum,
+            examed_item AS examedItem,
+            is_judge AS isJudge,
+            judge_number AS judgeNumber,
+            judge_date AS judgeDate,
+            is_coach AS isCoach,
+            coach_date AS coachDate,
+            coach_number AS coachNumber,
+            is_instructor AS isInstructor,
+            instructor_date AS instructorDate,
+            instructor_number AS instructorNumber,
+            experience,
+            activity,status
+        FROM t_member
+        LEFT JOIN t_member_organization ON t_member.id = t_member_organization.member_id
+        WHERE username = #{username}
+        AND password = #{password}
+        AND is_deleted = 1
+    </select>
+
+    <select id="queryAll" resultType="com.taiji.jilin.common.entity.Member">
+        SELECT tm.id,tm.name,birth,
+            CASE sex
+            WHEN '1' THEN '男'
+            WHEN '2' THEN '女'
+            ELSE '其他' END AS sex,
+            is_admin AS isAdmin,
+            username,password,
+            duty,qualification,political,email,
+            (SELECT tor.name FROM t_organization tor WHERE organization = tor.id) AS organization,
+            is_manager AS isManager,
+            level,tm.performance,tm.dues,area,company,
+            job_title AS jobTitle,
+            id_number AS idNumber,telephone,qq,photo,grade,item,
+            grade_date AS gradeDate,
+            grade_num AS  gradeNum,
+            instructed_date AS instructedDate,
+            instructed_num AS instructedNum,
+            instructed_item AS instructedItem,
+            managed_date AS managedDate,
+            managed_num AS managedNum,
+            managed_item AS managedItem,
+            examed_date AS examedDate,
+            examed_num AS examedNum,
+            examed_item AS examedItem,
+            is_judge AS isJudge,
+            judge_number AS judgeNumber,
+            judge_date AS judgeDate,
+            is_coach AS isCoach,
+            coach_date AS coachDate,
+            coach_number AS coachNumber,
+            is_instructor AS isInstructor,
+            instructor_date AS instructorDate,
+            instructor_number AS instructorNumber,
+            experience,
+            activity,tm.status
+        FROM t_member tm
+        LEFT JOIN t_member_organization tmo ON tm.id = tmo.member_id
+        LEFT JOIN t_organization tor ON tmo.organization_id = tor.id
+        <where>
+          <if test="admin != 1">
+            AND tm.is_admin != 1
+          </if>
+          <if test="organization != 0">
+            AND tm.organization = #{organization}
+          </if>
+          <if test="isAdmin !=0">
+            AND tm.is_admin = #{isAdmin}
+          </if>
+          <if test="status != -1">
+            <if test="status == 0">
+              AND (tm.status = 0 OR tm.status IS NULL OR tm.status = 1)
+            </if>
+            <if test="status == 2">
+              AND tm.status = #{status}
+            </if>
+          </if>
+          <if test="isJudge != -1">
+            AND tm.is_judge = #{isJudge}
+          </if>
+          <if test="isCoach != -1">
+            AND tm.is_coach = #{isCoach}
+          </if>
+          <if test="isInstructor != -1">
+            AND tm.is_instructor = #{isInstructor}
+          </if>
+          <if test="grade != -1">
+            AND tm.grade = #{grade}
+          </if>
+          <if test="sex != -1">
+            AND tm.sex = #{sex}
+          </if>
+            AND tm.is_deleted = 1
+        </where>
+    </select>
+
+    <update id="audit">
+        UPDATE t_member SET status = 1
+        WHERE id IN
+        <foreach collection="ids" open="(" separator="," close=")"  item="id">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="unAudit">
+        UPDATE t_member SET status = 2
+        WHERE id IN
+        <foreach collection="ids" open="(" separator="," close=")"  item="id">
+            #{id}
+        </foreach>
+    </update>
+
+    <insert id="newAdmin">
+        INSERT INTO t_member(name,username,password,is_admin)
+        VALUES (#{name},#{username},#{password},1)
+    </insert>
+
+    <update id="updatePsw">
+        UPDATE t_member SET password = #{password}
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryByOrganizationId" resultType="com.taiji.jilin.common.dto.ApplicationMemberDto">
+        SELECT
+            tm.name AS memberName,
+            tm.id AS memberId,
+            CASE tm.sex
+              WHEN '1' THEN '男'
+              WHEN '2' THEN '女'
+              ELSE '其他' END AS sex,
+            tm.birth,
+            tac.id AS activityId,
+            tac.name,tac.content,tac.population,
+            tac.provide_meal AS provideMeal,
+            tac.provide_hotel AS provideHotel,
+            tac.organization,tac.tel,tac.qq,tac.time,tac.budget,
+            tap.id AS applicationId,
+            tap.insurance,
+            tap.health,
+            tap.meal,
+            tap.liability,
+            tap.hotel,
+            tap.status AS applicationStatus
+        FROM (t_activity tac,t_member tm)
+            LEFT JOIN t_member_organization tmo ON tmo.`member_id` = tm.id
+            LEFT JOIN t_application tap ON tm.id = tap.member_id AND tac.id = tap.activity_id
+        WHERE tmo.organization_id = #{organizationId} AND tac.id = #{activityId} AND tm.is_deleted = 1
+    </select>
+
+    <select id="checkIdNumber" resultType="int">
+        SELECT COUNT(*) FROM t_member WHERE id_number = #{idNumber}
+    </select>
+</mapper>
